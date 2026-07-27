@@ -12,8 +12,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
-var MongoDBStore = require('connect-mongodb-session')(session);
-
+const { MongoStore } = require("connect-mongo");
 const ExpressError = require('./utils/ExpressError.js');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -24,10 +23,12 @@ const listingRouter = require('./routes/listing.js');
 const reviewRouter = require('./routes/review.js');
 const userRouter = require('./routes/user.js');
 
-// const MONGO_URL = 'mongodb://127.0.0.1:27017/airbnbClone';
+
+
+
 
 const dbUrl = process.env.MONGODB_URI;
-
+  console.log("DB URL =", process.env.MONGODB_URI);
 main()
   .then(() => {
     console.log('Connected to DB');
@@ -49,17 +50,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const store = new MongoDBStore({
+
+
+
+
+
+const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
     secret: process.env.SECRET,
   },
-  touchAter: 24 * 3600,
+  touchAfter: 24 * 3600,
 });
 
-store.on('error', function (error) {
-  console.log(' Store Error:', error);
+store.on("error", (err) => {
+  console.log("Mongo Session Store Error:", err);
 });
+
+
 
 const sessionOption = {
   store,
