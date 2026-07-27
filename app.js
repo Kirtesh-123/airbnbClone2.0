@@ -12,7 +12,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
-const { MongoStore } = require("connect-mongo");
+const { MongoStore } = require('connect-mongo');
 const ExpressError = require('./utils/ExpressError.js');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -28,18 +28,17 @@ const userRouter = require('./routes/user.js');
 
 
 const dbUrl = process.env.MONGODB_URI;
-  console.log("DB URL =", process.env.MONGODB_URI);
-main()
-  .then(() => {
+console.log('DB URL =', process.env.MONGODB_URI);
+async function startServer() {
+  try {
+    await mongoose.connect(dbUrl);
     console.log('Connected to DB');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-async function main() {
-  await mongoose.connect(dbUrl);
+  } catch (err) {
+    console.log('MongoDB Connection Error:', err);
+  }
 }
+
+startServer();
 
 app.engine('ejs', ejsMate);
 
@@ -50,11 +49,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
-
-
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
@@ -63,11 +57,9 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
-store.on("error", (err) => {
-  console.log("Mongo Session Store Error:", err);
+store.on('error', (err) => {
+  console.log('Mongo Session Store Error:', err);
 });
-
-
 
 const sessionOption = {
   store,
@@ -80,10 +72,6 @@ const sessionOption = {
     httpOnly: true,
   },
 };
-
-// app.get('/', (req, res) => {
-//   res.send('Hi, I am root');
-// });
 
 app.use(session(sessionOption));
 app.use(flash());
@@ -104,16 +92,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// passport demo
-
-// app.get('/demouser', async (req, res) => {
-//   let fakeUser = new User({
-//     email: 'Kirtesh@gmail.com',
-//     username: 'Sigma-student',
-//   });
-//   let registeredUser = await User.register(fakeUser, 'HelloWorld');
-//   res.send(registeredUser);
-// });
+app.get('/', (req, res) => {
+  res.redirect('/listings');
+});
 
 // Listing Routes
 app.use('/listings', listingRouter);
