@@ -1,0 +1,134 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <!-- <h3 class="mb-4">All Listings</h3> -->
+
+
+    <!-- airbnb filters -->
+    <div id="filters" class="d-flex align-items-center overflow-auto py-3 mb-4">
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-fire fs-4"></i>
+    <p>Trending</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-mountain-city fs-4"></i>
+    <p>Mountains</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-water fs-4"></i>
+    <p>Amazing Pools</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-umbrella-beach fs-4"></i>
+    <p>Beach</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-tree fs-4"></i>
+    <p>Camping</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-snowflake fs-4"></i>
+    <p>Arctic</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-landmark fs-4"></i>
+    <p>Castles</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-house fs-4"></i>
+    <p>Farms</p>
+  </div>
+
+  <div class="filter text-center me-4">
+    <i class="fa-solid fa-ship fs-4"></i>
+    <p>Boats</p>
+  </div>
+   <div class="ms-auto">
+    <div class="tax-toggle border rounded-pill px-3 py-2 d-flex align-items-center">
+
+        <span class="me-2 fw-semibold">
+            Display total before taxes
+        </span>
+
+        <div class="form-check form-switch m-0">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="taxSwitch"
+            >
+        </div>
+
+    </div>
+</div>
+
+</div>
+    
+
+    <div class="row">
+
+        <% for(let listing of allListings){ %>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+
+                <div class="card listing-card h-100">
+
+                    <a href="/listings/<%= listing._id %>">
+                        <img
+                            src="<%= listing.image.url %>"
+                            class="card-img-top"
+                            alt="<%= listing.title %>"
+                        >
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= listing.title %>
+                        </h5>
+
+                       <p class="card-text">
+    ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+    <span class="tax-info">
+        &nbsp;(+18% GST)
+    </span>
+</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% } %>
+        
+
+    </div>
+    
+
+</div>
+<script>
+const taxSwitch = document.querySelector("#taxSwitch");
+
+taxSwitch.addEventListener("change", () => {
+
+    let taxInfo = document.getElementsByClassName("tax-info");
+
+    for(let info of taxInfo){
+
+        if(taxSwitch.checked){
+            info.style.display = "inline";
+        }else{
+            info.style.display = "none";
+        }
+
+    }
+
+});
+</script>

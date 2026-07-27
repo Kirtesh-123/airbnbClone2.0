@@ -1,0 +1,118 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+  <h3 class="mb-4">Create a New Listing</h3>
+
+  <form
+    method="POST"
+    action="/listings"
+    class="row g-3 needs-validation"
+    novalidate
+    enctype="multipart/form-data">
+    <!-- Title -->
+    <div class="col-md-6">
+      <label class="form-label">Title</label>
+
+      <input
+        name="listing[title]"
+        type="text"
+        class="form-control"
+        placeholder="Enter title"
+        required />
+
+      <!-- Valid Message -->
+      <div class="valid-feedback">Title looks good!</div>
+
+      <!-- Invalid Message -->
+      <div class="invalid-feedback">Please enter a title.</div>
+    </div>
+
+    <!-- Price -->
+    <div class="col-md-6">
+      <label class="form-label">Price</label>
+
+      <input
+        name="listing[price]"
+        type="number"
+        class="form-control"
+        placeholder="Enter price"
+        required />
+
+      <!-- Valid Message -->
+      <div class="valid-feedback">Price looks good!</div>
+
+      <!-- Invalid Message -->
+      <div class="invalid-feedback">Please enter a valid price.</div>
+    </div>
+
+    <!-- Image -->
+    <!-- <div class="col-12">
+      <label class="form-label">Image URL</label>
+
+      <input
+        name="listing[image][url]"
+        type="text"
+        class="form-control"
+        placeholder="Enter Image URL" /> -->
+        <!-- Image -->
+    <div class="col-12">
+      <label class="form-label"> Enter Image Link</label>
+      <input
+        name="listing[image]"
+        type="file"
+        class="form-control"
+         />
+
+      <!-- Valid Message -->
+      <div class="valid-feedback">Image URL looks good!</div>
+    </div>
+
+    <!-- Description -->
+    <div class="col-12">
+      <label class="form-label">Description</label>
+
+      <textarea
+        name="listing[description]"
+        class="form-control"
+        rows="4"
+        placeholder="Enter description"
+        required></textarea>
+
+      <!-- Invalid Message -->
+      <div class="invalid-feedback">Please enter description.</div>
+    </div>
+
+    <!-- Country -->
+    <div class="col-md-6">
+      <label class="form-label">Country</label>
+
+      <input
+        name="listing[country]"
+        type="text"
+        class="form-control"
+        placeholder="Enter country"
+        required />
+
+      <div class="invalid-feedback">Please enter country.</div>
+    </div>
+
+    <!-- Location -->
+    <div class="col-md-6">
+      <label class="form-label">Location</label>
+
+      <input
+        name="listing[location]"
+        type="text"
+        class="form-control"
+        placeholder="Enter location"
+        required />
+
+      <div class="invalid-feedback">Please enter location.</div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-12">
+      <button class="btn btn-dark px-4 add-btn">Add Listing</button>
+    </div>
+  </form>
+</div>

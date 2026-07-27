@@ -1,0 +1,125 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+  <div class="col-8 offset-2">
+    <div class="container mt-4">
+      <h3 class="mb-4">Edit your Listing</h3>
+
+      <form
+        method="POST"
+        action="/listings/<%= listing._id %>?_method=PUT"
+        class="row g-3 needs-validation"
+        novalidate 
+        enctype="multipart/form-data"
+        >
+        <!-- Title -->
+        <div class="col-md-6">
+          <label class="form-label">Title</label>
+
+          <input
+            name="listing[title]"
+            value="<%= listing.title %>"
+            type="text"
+            class="form-control"
+            required />
+
+          <div class="valid-feedback">Title looks good!</div>
+
+          <div class="invalid-feedback">Please enter a title.</div>
+        </div>
+
+        <!-- Price -->
+        <div class="col-md-6">
+          <label class="form-label">Price</label>
+
+          <input
+            name="listing[price]"
+            value="<%= listing.price %>"
+            type="number"
+            class="form-control"
+            required />
+
+          <div class="valid-feedback">Price looks good!</div>
+
+          <div class="invalid-feedback">Please enter a valid price.</div>
+        </div>
+  
+           
+         <!-- Image URL -->
+        <div class="col-12">
+           original listing image
+           <img src="<%= OriginalImageUrl %>" alt="" srcset="">
+             />
+         
+        <!-- Image URL -->
+        <div class="col-12">
+          <label class="form-label"> upload new Image </label>
+
+          <input
+            name="listing[image]"
+            type="file"
+            class="form-control"
+             />
+
+          <div class="valid-feedback">Image URL looks good!</div>
+
+          <div class="invalid-feedback">Please enter image URL.</div>
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+          <label class="form-label">Description</label>
+
+          <textarea
+            name="listing[description]"
+            class="form-control"
+            rows="4"
+            required>
+           <%= listing.description %></textarea
+          >
+
+          <div class="valid-feedback">Description looks good!</div>
+
+          <div class="invalid-feedback">Please enter description.</div>
+        </div>
+
+        <!-- Country -->
+        <div class="col-md-6">
+          <label class="form-label">Country</label>
+
+          <input
+            name="listing[country]"
+            value="<%= listing.country %>"
+            type="text"
+            class="form-control"
+            required />
+
+          <div class="valid-feedback">Country looks good!</div>
+
+          <div class="invalid-feedback">Please enter country.</div>
+        </div>
+
+        <!-- Location -->
+        <div class="col-md-6">
+          <label class="form-label">Location</label>
+
+          <input
+            name="listing[location]"
+            value="<%= listing.location %>"
+            type="text"
+            class="form-control"
+            required />
+
+          <div class="valid-feedback">Location looks good!</div>
+
+          <div class="invalid-feedback">Please enter location.</div>
+        </div>
+
+        <!-- Update Button -->
+        <div class="col-12">
+          <button class="btn btn-dark px-4 edit-btn">Update Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-danger fs-3" href="/listings">
+      <i class="fa-solid fa-compass"></i> WanderLust
+    </a>
+
+    <!-- Mobile Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Search Bar -->
+      <form class="d-flex mx-auto" style="width:420px;" action="/listings" method="GET">
+        <input
+          class="form-control rounded-pill me-2"
+          type="search"
+          name="search"
+          placeholder="Search destinations..."
+        >
+
+        <button class="btn btn-danger rounded-pill px-4">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <!-- Right Side -->
+      <ul class="navbar-nav align-items-center ms-auto">
+
+        <li class="nav-item me-3">
+          <a class="nav-link fw-semibold" href="/listings/new">
+            Airbnb your home
+          </a>
+        </li>
+
+        <li class="nav-item me-3">
+          <i class="fa-solid fa-globe fs-5"></i>
+        </li>
+
+        <% if(!currUser){ %>
+
+        <li class="nav-item">
+          <a class="btn btn-outline-dark rounded-pill me-2" href="/login">
+            Login
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="btn btn-danger rounded-pill" href="/signup">
+            Sign Up
+          </a>
+        </li>
+
+        <% } else { %>
+
+        <li class="nav-item dropdown">
+
+          <a
+            class="btn btn-outline-secondary rounded-pill dropdown-toggle"
+            href="#"
+            data-bs-toggle="dropdown">
+
+            <i class="fa-solid fa-bars me-2"></i>
+            <i class="fa-solid fa-circle-user fs-5"></i>
+
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+
+            <li>
+              <a class="dropdown-item" href="/listings/new">
+                Add Listing
+              </a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+              <a class="dropdown-item text-danger" href="/logout">
+                Logout
+              </a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <% } %>
+
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
